@@ -1,3 +1,6 @@
+<?php include "includes/db.php"; ?>
+
+
 <html>
 	<head>
 		<title>Product detail</title>

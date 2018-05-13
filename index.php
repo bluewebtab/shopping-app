@@ -1,11 +1,4 @@
-<?php
-$server = "localhost";
-$username = "ronny";
-$password = "hello123";
-$database = "online_shopping";
-mysqli_connect($server, $username, $password, $database);
-?>
-
+<?php include "includes/db.php"; ?>
 
 <html>
 	<head>
