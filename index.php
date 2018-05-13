@@ -1,3 +1,12 @@
+<?php
+$server = "localhost";
+$username = "ronny";
+$password = "hello123";
+$database = "online_shopping";
+mysqli_connect($server, $username, $password, $database);
+?>
+
+
 <html>
 	<head>
 		<title>Online Shopping</title>
