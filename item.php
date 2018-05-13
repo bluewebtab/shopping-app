@@ -23,16 +23,25 @@
 			<div class="row">
 				<ol class="breadcrumb">
 					<li><a href="index.php">Home</a></li>
-					<li><a href="#">Watches</a></li>
-					<li class="active">Beautiful Watch</li>
+                    <?php
+                    if(isset ($_GET['item_id'])){
+                    $sql = "SELECT* FROM  items WHERE item_id = '$_GET[item_id]'";
+                    $run = mysqli_query($conn,$sql);
+                    while($rows = mysqli_fetch_assoc($run)){
+                        $item_cat = ucwords($rows['item_cat']);
+                        
+                        echo  "
+                        <li><a href='category.php?category=$item_cat'>$item_cat</a></li>
+					<li class='active'>$rows[item_title]</li>
+                        
+                        ";
+                    ?>
+					
 				</ol>
 			</div>
 			<div class="row">
                 <?php
-                if(isset ($_GET['item_id'])){
-                    $sql = "SELECT* FROM  items WHERE item_id = '$_GET[item_id]'";
-                    $run = mysqli_query($conn,$sql);
-                    while($rows = mysqli_fetch_assoc($run)){
+                
                      echo "
                             <div class='col-md-8'>
 				<h3 class='pp-title'>$rows[item_title]</h3>

@@ -16,7 +16,8 @@
 			<div class="row">
                 <?php 
                 if(isset($_GET['category'])){
-                    $sql = "SELECT * FROM items WHERE item_cat = '$_GET[category]'";
+                   
+                     $sql = "SELECT * FROM items WHERE item_cat = '$_GET[category]'";
                 $run = mysqli_query($conn,$sql);
                 while($rows = mysqli_fetch_assoc($run)){
                     $discounted_price = $rows['item_price'] - $rows['item_discount'];
