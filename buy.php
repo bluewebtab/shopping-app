@@ -87,7 +87,7 @@
 							</tr>
 							<tr>
 								<td>2</td>
-								<td>Tea Cup set</td>
+								<td>Minimalistic watch</td>
 								<td>4</td>
 								<td><button class="btn btn-danger btn-sm">Delete</button></td>
 								<td class="text-right"><b>150/=</b></td>

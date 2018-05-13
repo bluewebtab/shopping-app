@@ -28,21 +28,27 @@
 				</ol>
 			</div>
 			<div class="row">
-			<div class="col-md-8">
-				<h3 class="pp-title">Beautiful Watch</h3>
-				<img src="images/products/product1.jpg" class="img-responsive">
-				<h4 class="pp-desc-head">Description</h4>
-				<div class="pp-desc-detail">
-					<p>This is a very beautiful watch. its purely made on metal.You can buy this watch by click on the buy button.</p>
-					<ul>
-						<li>It's Beautiful</li>
-						<li>Made of Metal</li>
-						<li>An original and branded quality</li>
-						<li>Free Shipping overall the country</li>
-						<li>Pay Securely via <b>CASH ON DELIVERY</b> method</li>
-					</ul>
-				</div>
+                <?php
+                if(isset ($_GET['item_id'])){
+                    $sql = "SELECT* FROM  items WHERE item_id = '$_GET[item_id]'";
+                    $run = mysqli_query($conn,$sql);
+                    while($rows = mysqli_fetch_assoc($run)){
+                     echo "
+                            <div class='col-md-8'>
+				<h3 class='pp-title'>$rows[item_title]</h3>
+				<img src='$rows[item_image]' class='img-responsive'>
+				<h4 class='pp-desc-head'>Description</h4>
+				<div class='pp-desc-detail'>
+					$rows[item_description]</div>
 			</div>
+                     
+                     ";   
+                    }
+                    
+                }
+                    
+                ?>
+			
 			<aside class="col-md-4">
 				
 				<a href="buy.php" class="btn btn-success btn-lg btn-block">Buy</a>
