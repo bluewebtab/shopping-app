@@ -23,7 +23,7 @@
                     $discounted_price = $rows['item_price'] - $rows['item_discount'];
                     $item_title = str_replace(' ', '-', $rows['item_title']);
                     echo "
-                    <div class='col-md-3'>
+                    <div class=' col-md-3'>
 					<div class='col-md-12  single-item noPadding'>
 						<div class='top'><img src='$rows[item_image]'></div>
 						<div class='bottom'>

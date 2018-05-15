@@ -8,7 +8,7 @@
              </div>
              <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-left">
-            
+            <li><a href= "index.php">Home</a></li>
            
                     <?php 
                         $cat_sql = "SELECT * FROM item_cat";
