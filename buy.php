@@ -1,4 +1,23 @@
-<?php include "includes/db.php"; ?>
+<?php session_start();
+include "includes/db.php";
+    if(isset($_GET['chk_item_id'])){
+        $date = date('Y-m-d h:i:s');
+        $rand_num = mt_rand();
+        
+        if(isset($_SESSION['ref'])){
+            
+            
+        }else{
+            $_SESSION['ref'] = $date.'_'.$rand_num;
+        }
+        
+        
+        $chk_sql = "INSERT INTO checkout (chk_item, chk_ref, chk_timing) VALUES ('$_GET[chk_item_id]', '$_SESSION[ref]', '$date')";
+        $chk_run = mysqli_query($conn, $chk_sql);
+        
+    }
+
+?>
 
 
 <html>
@@ -76,24 +95,27 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+                             <?php
+                                $chk_sel_sql = "SELECT * FROM checkout WHERE chk_ref = '$_SESSION[ref]'";
+                                $chk_sel_run = mysqli_query($conn, $chk_sel_sql);
+                                while($chk_sel_rows = mysqli_fetch_assoc($chk_sel_run)){
+                                    echo "
+                                    <tr>
 								<td>1</td>
 								<td>Beautiful Watch</td>
 								<td>1</td>
-								<td><button class="btn btn-danger btn-sm">Delete</button></td>
-								<td class="text-right"><b>100/=</b></td>
-								<td class="text-right"><b>100/=</b></td>
+								<td><button class='btn btn-danger btn-sm'>Delete</button></td>
+								<td class='text-right'><b>100/=</b></td>
+								<td class='text-right'><b>100/=</b></td>
 								
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>Minimalistic watch</td>
-								<td>4</td>
-								<td><button class="btn btn-danger btn-sm">Delete</button></td>
-								<td class="text-right"><b>150/=</b></td>
-								<td class="text-right"><b>600/=</b></td>
-								
-							</tr>
+                                    ";
+                                    
+                                }
+                                
+                            ?>
+							
+							
 						</tbody>
 					</table>
 					<table class="table">
@@ -103,6 +125,7 @@
 							</tr>
 						</thead>
 						<tbody>
+                           
 							<tr>
 								<td>Subtotal</td>
 								<td class="text-right"><b>700/=</b></td>
