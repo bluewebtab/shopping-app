@@ -28,8 +28,32 @@ include "includes/db.php";
 		<link rel="stylesheet" href="css/style.css">
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.js"></script>
+        <script>
+            function ajax_func( ){
+               xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                       document.getElementById('get_processed_data').innerHTML = xmlhttp.responseText;
+                       }
+                }
+                xmlhttp.open('GET', 'buy_process.php', true );
+                xmlhttp.send();
+            }
+            function del_func(chk_id){
+               
+               
+                xmlhttp.onreadystatechange = function() {
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                            document.getElementById('get_processed_data').innerHTML = xmlhttp.responseText;
+                       }
+                    
+                }
+                xmlhttp.open('GET', 'buy_process.php?chk_del_id='+chk_id, true);
+                    xmlhttp.send();
+            }
+        </script>
 	</head>
-	<body>
+	<body onload="ajax_func();">
 		<?php include 'includes/header.php'; ?>
 		<div class="container">
 		
@@ -94,26 +118,9 @@ include "includes/db.php";
 								
 							</tr>
 						</thead>
-						<tbody>
-                             <?php
-                                $chk_sel_sql = "SELECT * FROM checkout WHERE chk_ref = '$_SESSION[ref]'";
-                                $chk_sel_run = mysqli_query($conn, $chk_sel_sql);
-                                while($chk_sel_rows = mysqli_fetch_assoc($chk_sel_run)){
-                                    echo "
-                                    <tr>
-								<td>1</td>
-								<td>Beautiful Watch</td>
-								<td>1</td>
-								<td><button class='btn btn-danger btn-sm'>Delete</button></td>
-								<td class='text-right'><b>100/=</b></td>
-								<td class='text-right'><b>100/=</b></td>
-								
-							</tr>
-                                    ";
-                                    
-                                }
-                                
-                            ?>
+						<tbody id = "get_processed_data">
+                            <!--The buy process data-->
+                            
 							
 							
 						</tbody>
