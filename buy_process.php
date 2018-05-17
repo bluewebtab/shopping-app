@@ -15,6 +15,22 @@ if(isset($_REQUEST['up_chk_qty'])){
 $total = 0;
 $delivery_charges = 0;
 
+echo "
+    <table class = 'table'>
+        <thead>
+            <tr>
+                <th>number</th>
+                <th>item</th>
+                <th>qty</th>
+                <th width='5%'>Delete</th>
+                <th class = 'text-right'>Price</th>
+                <th class = 'text-right'>Sub Total</th>
+            </tr>
+        </thead>
+    <tbody>
+
+
+";
 
 
 
@@ -47,7 +63,8 @@ $delivery_charges = 0;
   
  $_SESSION['grand_total'] = $grand_total = $total;
     echo "
-   <section style = 'height: 60px; position:relative; left:30px;'>
+  </tbody>
+  </table>
     <table class='table'  >
 						<thead >
 							<tr >
@@ -66,11 +83,11 @@ $delivery_charges = 0;
 							</tr>
 							<tr>
 								<td>Grand Total</td>
-								<td class='text-right'colspan='6'><b>$_SESSION[$grand_total]</b></td>
+								<td class='text-right'colspan='6'><b>$_SESSION[grand_total]</b></td>
 							</tr>
 						</tbody>
 					</table>
-            <section>        
+                 
                    
     
     ";

@@ -25,6 +25,9 @@ include "includes/db.php";
     $contact =  mysqli_real_escape_string($conn, strip_tags($_POST['contact']));
     $state =  mysqli_real_escape_string($conn, strip_tags($_POST['state']));
      $delivery_address =  mysqli_real_escape_string($conn, strip_tags($_POST['delivery_address']));
+     
+     $order_ins_sql = "INSERT INTO orders (order_name, order_email, order_contact, order_state, order_delivery_address, order_checkout_ref, order_total) VALUES ('$name', '$email', '$contact', '$state', '$delivery_address', '$_SESSION[ref]', '$_SESSION[grand_total]')";
+     mysqli_query($conn, $order_ins_sql);
  }
 
 ?>
@@ -128,18 +131,8 @@ include "includes/db.php";
 			<div class="panel panel-default">
 				<div class="panel-heading">Order Detail</div>
 				<div class="panel-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th> Number</th>
-								<th>Item</th>
-								<th>qty</th>
-								<th width="5%">Delete</th>
-								<th class="text-right">Price</th>
-								<th class="text-right">Total</th>
-								
-							</tr>
-						</thead>
+					
+						
 						<div id = "get_processed_data">
                             <!--The buy process data-->
                             
