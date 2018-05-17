@@ -12,10 +12,20 @@ include "includes/db.php";
         }
         
         
-        $chk_sql = "INSERT INTO checkout (chk_item, chk_ref, chk_timing) VALUES ('$_GET[chk_item_id]', '$_SESSION[ref]', '$date')";
-        $chk_run = mysqli_query($conn, $chk_sql);
+        $chk_sql = "INSERT INTO checkout (chk_item, chk_ref, chk_timing, chk_qty) VALUES ('$_GET[chk_item_id]', '$_SESSION[ref]', '$date', 1)";
+        
+        if(mysqli_query($conn, $chk_sql)){
+        ?><script>window.location = "buy.php";</script><?php
+        }
         
     }
+ if(isset($_POST['order_submit'])){
+    $name =  mysqli_real_escape_string($conn, strip_tags($_POST['name']));
+     $email =  mysqli_real_escape_string($conn, strip_tags($_POST['email']));
+    $contact =  mysqli_real_escape_string($conn, strip_tags($_POST['contact']));
+    $state =  mysqli_real_escape_string($conn, strip_tags($_POST['state']));
+     $delivery_address =  mysqli_real_escape_string($conn, strip_tags($_POST['delivery_address']));
+ }
 
 ?>
 
@@ -80,30 +90,31 @@ include "includes/db.php";
      
       </div>
       <div class="modal-body">
+    <form method = "post">
         <div class="group">
 			<label>Name</label>
-			<input type="text" class="form-control">
+			<input type="text" name = "name" class="form-control">
 		</div>
 		<div class="group">
 			<label>Email Address</label>
-			<input type="text" class="form-control">
+			<input type="text" name = "email" class="form-control">
 		</div>
 		<div class="group">
 			<label>Contact Number</label>
-			<input type="text" class="form-control">
+			<input type="text" name = "contact" class="form-control">
 		</div>
 		<div class="group">
 			<label>States</label>
-			<input type="text" class="form-control">
+			<input type="text" name = "state" id = "state" class="form-control">
 		</div>
 		<div class="group">
-			<label>Contact Number</label>
-			<textarea class="form-control"></textarea>
+			<label>Delivery address</label>
+			<textarea class="form-control" name = "delivery_address"></textarea>
 		</div>
-		<div class="group">
-			<label>States</label>
-			<input type="button" class="btn btn-danger btn-lg btn-block" value="Submit">
-		</div>
+          <div class ="group">
+          <input type = "submit" name = "order_submit" class = "btn btn-danger btn-block btn-lg">
+          </div>
+          </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -129,36 +140,14 @@ include "includes/db.php";
 								
 							</tr>
 						</thead>
-						<tbody id = "get_processed_data">
+						<div id = "get_processed_data">
                             <!--The buy process data-->
                             
 							
 							
-						</tbody>
-					</table>
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="text-center" colspan="2">Order Summary</th>
-							</tr>
-						</thead>
-						<tbody>
-                           
-							<tr>
-								<td>Subtotal</td>
-								<td class="text-right"><b>700/=</b></td>
-							</tr>
-							<tr>
-								<td>Delivery Charges</td>
-								<td class="text-right"><b>Free</b></td>
-							</tr>
-							<tr>
-								<td>Grand Total</td>
-								<td class="text-right"><b>700/=</b></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+						</div>
+					
+				
 			</div>
 		</div>
 		<br><br><br><br><br>

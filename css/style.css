@@ -4,6 +4,7 @@
 body {
 	background: #e6e6e6;
 }
+
 .container {
 	background: white;
 }
@@ -12,6 +13,7 @@ body {
 	margin-bottom: 20px;
 	height: 320px;
 	border: solid 1px silver;
+	-webkit-box-shadow: 0 0 5px gray;
 	box-shadow: 0 0 5px gray;
 	
 }
@@ -89,3 +91,5 @@ body {
 	border-radius: 0;
 	
 }
+
+

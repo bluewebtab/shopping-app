@@ -11,12 +11,24 @@ if(isset($_REQUEST['up_chk_qty'])){
 }
 
     $c = 1;
+    $i = 1;
+$total = 0;
+$delivery_charges = 0;
+
+
+
+
 //                                $chk_sel_sql = "SELECT * FROM checkout WHERE chk_ref = '$_SESSION[ref]'";
     $chk_sel_sql = "SELECT * FROM checkout c JOIN items i ON c.chk_item = i.item_id WHERE c.chk_ref = '$_SESSION[ref]'";
     $chk_sel_run = mysqli_query($conn, $chk_sel_sql);
     while($chk_sel_rows = mysqli_fetch_assoc($chk_sel_run)){
+        
        $discounted_price = $chk_sel_rows['item_price'] - $chk_sel_rows['item_discount'];
-        $total = $discounted_price * $chk_sel_rows['chk_qty'];
+        $sub_total = $discounted_price * $chk_sel_rows['chk_qty'];
+        $total += $sub_total;
+       
+        
+        
         echo "
         <tr>
     <td>$c</td>
@@ -24,12 +36,43 @@ if(isset($_REQUEST['up_chk_qty'])){
     <td><input type = 'number' style='width: 45px;' onblur= "up_chk_qty(this.value, '<?php echo $chk_sel_rows['chk_id']; ?>');" value= '<?php echo $chk_sel_rows['chk_qty']; ?>'></td>
     <td><button class='btn btn-danger btn-sm' onclick = "del_func(<?php echo $chk_sel_rows['chk_id'];?>);">Delete</button></td>
     <?php echo "<td class='text-right'><b>$discounted_price </b></td>
-    <td class='text-right'><b>$total</b></td>
+    <td class='text-right'><b>$sub_total</b></td>
 
 </tr>
         ";
         $c++;
 
     }
+    
+  
+ $_SESSION['grand_total'] = $grand_total = $total;
+    echo "
+   <section style = 'height: 60px; position:relative; left:30px;'>
+    <table class='table'  >
+						<thead >
+							<tr >
+								<th class='text-center' colspan='6'>Order Summary</th>
+							</tr>
+						</thead>
+						<tbody>
+                           
+							<tr>
+								<td>Subtotal</td>
+								<td class='text-right' colspan='6'><b>$total</b></td>
+							</tr>
+							<tr>
+								<td>Delivery Charges</td>
+								<td class='text-right'colspan='6'>Free<b></b></td>
+							</tr>
+							<tr>
+								<td>Grand Total</td>
+								<td class='text-right'colspan='6'><b>$_SESSION[$grand_total]</b></td>
+							</tr>
+						</tbody>
+					</table>
+            <section>        
+                   
+    
+    ";
 
         ?>
