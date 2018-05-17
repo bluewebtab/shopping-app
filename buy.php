@@ -51,6 +51,17 @@ include "includes/db.php";
                 xmlhttp.open('GET', 'buy_process.php?chk_del_id='+chk_id, true);
                     xmlhttp.send();
             }
+            function up_chk_qty(chk_qty, chk_id){
+                
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status ==200){
+                        document.getElementById('get_processed_data').innerHTML = xmlhttp.responseText;
+                    }
+                    
+                }
+                xmlhttp.open('GET', 'buy_process.php?up_chk_qty='+chk_qty+'&up_chk_id='+chk_id, true);
+                    xmlhttp.send();
+            }
         </script>
 	</head>
 	<body onload="ajax_func();">
