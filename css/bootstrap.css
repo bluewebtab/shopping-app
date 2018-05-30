@@ -1097,7 +1097,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #797979;
+  color: #222222;
 
 }
 a:focus {
@@ -4266,7 +4266,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 1px 0 0;
 }
 .navbar-brand {
-  float: left;
+  float:left;
   height: 50px;
   padding: 15px 15px;
   font-size: 18px;
