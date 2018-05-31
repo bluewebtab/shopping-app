@@ -4266,11 +4266,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 1px 0 0;
 }
 .navbar-brand {
-  float:left;
-  height: 50px;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
+  position: absolute;
+    left: 50%;
+    margin-left: -50px !important;  /* 50% of your logo width */
+    display: block;
+    font-size: 40px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -4323,6 +4323,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 20px;
 }
 @media (max-width: 767px) {
+    
+    .navbar-brand{
+       margin-top:-23rem;
+        left:5rem;
+        
+        
+    }
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;

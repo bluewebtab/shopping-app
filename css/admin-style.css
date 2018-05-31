@@ -3,3 +3,8 @@
     color:white;
     border-bottom: 3px solid #00a7ff;
 }
+
+.btn-red{
+    border-radius: 0;
+    background:red;
+}
