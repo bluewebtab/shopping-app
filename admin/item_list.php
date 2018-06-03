@@ -1,33 +1,39 @@
 <?php include "../includes/db.php"; 
 
-if(isset($POST['item_submit'])){
-    $_POST['item_name'];
-    $_POST['item_description'];
-    $_POST['item_category'];
-    $_POST['item_quantity'];
-    $_POST['item_cost'];
-    $_POST['item_price'];
-    $_POST['item_discount'];
-    $_POST['item_delivery'];
+if(isset($_POST['item_submit'])){
+    $item_title = mysqli_real_escape_string($conn, strip_tags($_POST['item_title']));
+    $item_description = mysqli_real_escape_string($conn, $_POST['item_description']);
+    $item_category = mysqli_real_escape_string($conn, strip_tags($_POST['item_category']));
+    $item_quantity = mysqli_real_escape_string($conn, strip_tags($_POST['item_quantity']));
+    $item_cost = mysqli_real_escape_string($conn, strip_tags($_POST['item_cost']));
+    $item_price = mysqli_real_escape_string($conn, strip_tags($_POST['item_price']));
+    $item_discount = mysqli_real_escape_string($conn, strip_tags($_POST['item_discount']));
+    
     if(isset($_FILES['item_image']['name'])){
         
          $file_name = $_FILES['item_image']['name'];
          $path_address= "../images/items/$file_name";
+         $path_address_db= "images/items/$file_name";
          $img_confirm = 1;
-    $file_type = pathinfo($FILES['item_image']['name']);
+    $file_type = pathinfo($_FILES['item_image']['name'], PATHINFO_EXTENSION);
     if ($_FILES['item_image']['size'] > 200000){
         $img_confirm = 0;
+        echo 'The size is very big!';
     }
-        if(file_type != 'jpg' && $file_type != 'png' && $file_type != 'gif'){
+        if($file_type != 'jpg' && $file_type != 'png' && $file_type != 'gif'){
             $img_confirm = 0;
+            echo 'Type is not matching!';
         }
-        if($img_confirm = 0){
+        if($img_confirm == 0){
             
         }else{
-            if(move_uploaded_file($FILES['item_image']['tmp_name'], $path_address) ){
-                $item_ins_sql = "INSERT INTO items () VALUES ();";
+            if(move_uploaded_file($_FILES['item_image']['tmp_name'], $path_address) ){
+                $item_ins_sql = "INSERT INTO items (item_image, item_title, item_description, item_cat, item_qty, item_cost, item_price, item_discount) VALUES ('$path_address_db', '$item_title', '$item_description', '$item_category', '$item_quantity', '$item_cost', '$item_price', '$item_discount')";
+                $item_ins_run = mysqli_query($conn, $item_ins_sql);
             }
         }
+    }else{
+        echo 'sorry';
     }
    
 
@@ -76,22 +82,22 @@ if(isset($POST['item_submit'])){
                         <h4 class = "modal-title">Add new item</h4>
                     </div>
                     <div class = "modal-body">
-                        <form method = "post" enctype = "mutipart/form-data">
+                        <form method = "post" enctype = "multipart/form-data">
                             <div class = "form-group">
                                     <label>Item Image</label>
-                                    <input type="file" name = "item_image" class = "form-control">
+                                    <input type="file" name = "item_image" class = "form-control" required>
                             </div>
                             <div class = "form-group">
-                                <label>Item Name</label>
-                                <input type = "text" name = "item_name" class = "form-control">
+                                <label>Item Title</label>
+                                <input type = "text" name = "item_title" class = "form-control" required>
                             </div>
                             <div class = "form-group">
                                 <label>Item Description</label>
-                                <textarea name = "item_description" class = "form-control"></textarea>
+                                <textarea name = "item_description" class = "form-control" required></textarea>
                             </div>
                             <div class = "form-group">
                                 <label>Item Category</label>
-                                <select class = "form-control" name = "item_category">
+                                <select class = "form-control" name = "item_category" required>
                                 <option>Select a Category</option>
 
                                     <?php
@@ -113,19 +119,19 @@ if(isset($POST['item_submit'])){
                             </div>
                              <div class = "form-group">
                                 <label>Item Quantity</label>
-                                 <input type = "number" name = "item_quantity" class = "form-control">
+                                 <input type = "number" name = "item_quantity" class = "form-control" required>
                              </div>
                             <div class = "form-group">
                                     <label>Item Cost</label>
-                                    <input type = "number" name = "item_cost" class = "form-control">
+                                    <input type = "number" name = "item_cost" class = "form-control" required>
                             </div>
                             <div class = "form-group">
                                 <label>Item Price</label>
-                                <input type = "number" name = "item_price" class = "form-control">
+                                <input type = "number" name = "item_price" class = "form-control" required>
                             </div>
                             <div class = "form-group">
                                 <label>Item discount</label>
-                                <input type = "number" name = "item-discount" class = "form-control">
+                                <input type = "number" name = "item_discount" class = "form-control" required>
                             </div>
                                 <div class = "form-group">
                                 <label>Item delivery</label>
