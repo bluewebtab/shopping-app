@@ -66,6 +66,11 @@ if(isset($_POST['item_submit'])){
             xmlhttp.send();
             
         }
+        
+        function del_item(item_id){
+            xmlhttp.open('GET', 'item_list_process.php?del_item_id ='+ item_id, true);
+            xmlhttp.send();
+        }
     </script>
 </head>
 
