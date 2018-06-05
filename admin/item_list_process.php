@@ -1,7 +1,8 @@
  <?php include '../includes/db.php';
 
 if(isset($_REQUEST['del_item_id'])){
-    $del_sql = "DELETE FROM items WHERE item_id = '$_REQUEST[del_item_id]'";
+    $req = $_REQUEST[del_item_id];
+    $del_sql = "DELETE FROM items WHERE item_id = '$req'";
     mysqli_query($conn, $del_sql);
 
 }
